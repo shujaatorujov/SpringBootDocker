@@ -10,4 +10,9 @@ public class HelloController {
     public String getHello(){
         return "Hello, World";
     }
+
+    @GetMapping(path = "/fazil")
+    public String getFazil(){
+        return "Fazil";
+    }
 }

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-docker
+spec:
+  selector:
+    matchLabels:
+      app: spring-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: spring-app
+    spec:
+      containers:
+      - name: spring-docker
+        image: progc3/spring-docker
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: spring-app
+  name: spring-svc
+  namespace: default
+spec:
+  type: NodePort  # use ClusterIP as type here
+  ports:
+    - port: 8080
+  selector:
+    app: spring-app

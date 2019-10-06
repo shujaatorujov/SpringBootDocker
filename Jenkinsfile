@@ -1,4 +1,4 @@
-node {
+pipeline {
   environment {
     registry = "progc3/spring-docker"
     registryCredential = 'dockerHub'

@@ -44,7 +44,7 @@ pipeline {
     stage('Deploy image with Kubernetes') {
       steps{
         sh "export KUBECONFIG=/etc/kubernetes/admin.conf"
-        sh "kubectl run spring-docker --image=progc3/spring-docker:latest --port 8080 --replicas 2"
+        sh "kubectl create -f deployment.yaml"
       }
     }
   }

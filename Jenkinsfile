@@ -47,4 +47,10 @@ pipeline {
       }
     }
   }
+
+  post {
+          always {
+              emailext body: 'Your Application home page is: http://192.168.47.129:30005/', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+          }
+      }
 }

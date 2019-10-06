@@ -6,13 +6,17 @@ pipeline {
   agent any
   stages {
     stage('Clone Image from Github'){
-     sh 'rm -rf SpringBootDocker' 
-     sh 'git clone https://github.com/shujaatorujov/SpringBootDocker.git'
-     sh 'cd SpringBootDocker/'
+      steps{
+        sh 'rm -rf SpringBootDocker' 
+        sh 'git clone https://github.com/shujaatorujov/SpringBootDocker.git'
+        sh 'cd SpringBootDocker/'
+      }
     }
     
     stage('Compile and Test project'){
-     sh 'mvn clean compile install'
+      steps{
+        sh 'mvn clean compile install'
+      }
     }
     
     stage('Building image') {

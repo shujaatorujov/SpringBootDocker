@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: spring-docker
-        image: progc3/spring-docker
+        image: progc3/spring-docker:latest
         ports:
         - containerPort: 8080
 ---

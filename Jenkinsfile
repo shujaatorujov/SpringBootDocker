@@ -22,7 +22,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build registry //+ ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
@@ -37,13 +37,13 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry" //:$BUILD_NUMBER
+        sh "docker rmi $registry" + :$BUILD_NUMBER
       }
     }
     
     stage('Deploy image with Kubernetes') {
       steps{
-        sh "export KUBECONFIG=/var/lib/jenkins/config && kubectl apply -f deployment.yaml"
+        sh "export KUBECONFIG=/var/lib/jenkins/config && sed -i 's/latest/$BUILD_NUMBER/g' deployment.yaml && kubectl apply -f deployment.yaml"
       }
     }
   }

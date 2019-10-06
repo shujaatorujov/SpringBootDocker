@@ -15,6 +15,7 @@ spec:
       containers:
       - name: spring-docker
         image: progc3/spring-docker:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
 ---
@@ -29,5 +30,6 @@ spec:
   type: NodePort  # use ClusterIP as type here
   ports:
     - port: 8080
+    - nodePort: 30005
   selector:
     app: spring-app

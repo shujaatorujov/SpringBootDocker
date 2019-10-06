@@ -44,7 +44,7 @@ pipeline {
     stage('Deploy image with Kubernetes') {
       steps{
         sh "export KUBECONFIG=/etc/kubernetes/admin.conf"
-        sh "kubectl create -f deployment.yaml"
+        sh "kubectl apply -f deployment.yaml"
       }
     }
   }

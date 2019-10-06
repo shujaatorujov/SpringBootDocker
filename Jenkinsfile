@@ -22,11 +22,11 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry //+ ":$BUILD_NUMBER"
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Push Image to the Docker Hub ') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
@@ -37,7 +37,13 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $registry" //:$BUILD_NUMBER
+      }
+    }
+    
+    stage('Deploy image with Kubernetes') {
+      steps{
+        sh "kubectl apply -f deployment.yaml"
       }
     }
   }

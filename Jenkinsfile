@@ -15,7 +15,7 @@ pipeline {
     
     stage('Compile and Test project'){
       steps{
-        sh 'mvn clean compile install'
+        sh './mvnw clean compile install'
       }
     }
     

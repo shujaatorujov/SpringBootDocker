@@ -41,16 +41,16 @@ pipeline {
       }
     }
     
-   // stage('Deploy image with Kubernetes') {
-     // steps{
-       // sh "export KUBECONFIG=/var/lib/jenkins/config && sed -i 's/latest/$BUILD_NUMBER/g' deployment.yaml && kubectl apply -f deployment.yaml"
-      //}
-    //}
-  //}
+    stage('Deploy image with Kubernetes') {
+      steps{
+        sh "export KUBECONFIG=/var/lib/jenkins/config && sed -i 's/latest/$BUILD_NUMBER/g' deployment.yaml && kubectl apply -f deployment.yaml"
+      }
+    }
+  }
 
-  //post {
-  //        always {
-  //            emailext body: 'Your Application home page is: http://192.168.47.129:30005/', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Spring Boot Application'
-  //        }
-  //    }
+  post {
+          always {
+              emailext body: 'Your Application home page is: http://192.168.47.129:30005/', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Spring Boot Application'
+          }
+      }
 }

@@ -16,6 +16,7 @@ pipeline {
     stage('Compile and Test project'){
       steps{
         sh 'mvn clean compile install'
+        sh 'chmod 666 /var/run/docker.sock'
       }
     }
     
